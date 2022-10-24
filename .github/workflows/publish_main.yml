@@ -77,7 +77,12 @@ jobs:
             export CR_PAT=${{ secrets.GH_PAT_READ_PACKAGE }}
             echo $CR_PAT | docker login  ghcr.io -u $GITHUB_USERNAME
             cd ${{ env.ROOT_DIR }}
+            touch .env
+            echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
+            echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
+            echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
+            echo TELEGRAM_TOKEN=${{ env.TELEGRAM_TOKEN }} >> .env
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml stop
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml pull
-            POSTGRES_DB=$POSTGRES_DB POSTGRES_USER=$POSTGRES_USER POSTGRES_PASSWORD=$POSTGRES_PASSWORD TELEGRAM_TOKEN=$TELEGRAM_TOKEN docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml up --force-recreate -d
+            docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml up --force-recreate -d
             docker image prune -a -f 
