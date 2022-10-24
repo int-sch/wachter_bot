@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  schintbot-db:
+    container_name: schintbot-db-dev
+    image: postgres:alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB:       ${POSTGRES_DB}
+      POSTGRES_HOST:     schintbot-db
+      POSTGRES_USER:     ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - volume-db:/data/db
+      - postgres-data:/var/lib/postgresql/data
+      - ./share/sql:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 5s
+      timeout: 2s
+      retries: 3
+
+  schintbot:
+    container_name: schintbot-dev
+    build:
+      context: .
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - DATABASE_URL=postgresql://user:password@schintbot-db/db
+    restart: unless-stopped
+    depends_on:
+      schintbot-db:
+        condition: service_healthy
+
+volumes:
+  volume-db:
+  postgres-data:
+
+networks:
+  default:
+    name: network-schintbot-dev

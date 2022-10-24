@@ -20,7 +20,7 @@ def main():
     dp.add_handler(CommandHandler('start', actions.on_start_command, pass_user_data=True))
     dp.add_handler(CommandHandler('skip', actions.on_skip_command, allow_edited=True, pass_job_queue=True))
     dp.add_handler(CallbackQueryHandler(actions.on_button_click, pass_user_data=True))
-    dp.add_handler(MessageHandler((Filters.text | Filters.entity), actions.on_message, allow_edited=True, pass_user_data=True, pass_job_queue=True))
+    dp.add_handler(MessageHandler((Filters.text | Filters.entity), actions.on_message, edited_updates=True, pass_user_data=True, pass_job_queue=True))
     
     updater.start_polling()
     updater.idle()

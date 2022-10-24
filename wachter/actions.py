@@ -22,7 +22,7 @@ def authorize_user(bot, chat_id, user_id):
     try:
         status = bot.get_chat_member(chat_id, user_id).status
         return status in ['creator', 'administrator']
-    except e:
+    except Exception as e:
         return False
 
 def mention_markdown(bot, chat_id, user_id, message):
