@@ -62,13 +62,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IMAGE_NAME: ${{ env.IMAGE_NAME }}
           ROOT_DIR: /home/${{ secrets.DO_USER }}/${{ env.PACKAGE_LABEL }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          TELEGRAM_TOKEN: ${{ env.TELEGRAM_TOKEN }}
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USER }}
           passphrase: ${{ secrets.DO_SSH_KEY_PASSWORD }}
           key: ${{ secrets.DO_SSH_KEY }}
           port: ${{ secrets.DO_PORT }}
-          envs: GITHUB_USERNAME, GITHUB_TOKEN, ROOT_DIR, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, TELEGRAM_PROD_TOKEN
+          envs: GITHUB_USERNAME, GITHUB_TOKEN, ROOT_DIR, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, TELEGRAM_TOKEN
           script: |
             export CR_PAT=${{ secrets.GH_PAT_READ_PACKAGE }}
             echo $CR_PAT | docker login  ghcr.io -u $GITHUB_USERNAME
