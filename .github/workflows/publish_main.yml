@@ -79,5 +79,5 @@ jobs:
             cd ${{ env.ROOT_DIR }}
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml stop
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml pull
-            docker-compose POSTGRES_DB=${{ env.POSTGRES_DB }} POSTGRES_USER=${{ env.POSTGRES_USER }} POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} TELEGRAM_TOKEN=${{ env.TELEGRAM_TOKEN }} -f docker-compose.${{ env.PACKAGE_LABEL }}.yml up --force-recreate -d
+            POSTGRES_DB=${{ env.POSTGRES_DB }} POSTGRES_USER=${{ env.POSTGRES_USER }} POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} TELEGRAM_TOKEN=${{ env.TELEGRAM_TOKEN }} docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml up --force-recreate -d
             docker image prune -a -f 
