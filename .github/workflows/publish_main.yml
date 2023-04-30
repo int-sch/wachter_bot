@@ -66,6 +66,7 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           TELEGRAM_TOKEN: ${{ env.TELEGRAM_TOKEN }}
+          TELEGRAM_ERROR_CHAT_ID: ${{ env.TELEGRAM_ERROR_CHAT_ID }}
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USER }}
@@ -82,6 +83,7 @@ jobs:
             echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
             echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
             echo TELEGRAM_TOKEN=${{ env.TELEGRAM_TOKEN }} >> .env
+            echo TELEGRAM_ERROR_CHAT_ID=${{ env.TELEGRAM_ERROR_CHAT_ID }} >> .env
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml stop
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml pull
             docker-compose -f docker-compose.${{ env.PACKAGE_LABEL }}.yml up --force-recreate -d

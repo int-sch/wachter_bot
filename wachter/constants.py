@@ -1,5 +1,7 @@
 from enum import IntEnum, auto
 
+LOG_FORMAT = "%(asctime)s - %(name)s\t- %(levelname)s\t- %(message)s"
+
 # MESSAGES
 on_set_new_message = 'Обновил сообщение.'
 on_success_set_kick_timeout_response = 'Обновил таймаут кика.'

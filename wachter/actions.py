@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def on_error(bot, update, error):
-    logger.warning(f'Update "{update}" caused error "{error}"')
+    logger.error(f'Update "{update}" caused error "{error}"')
 
 
 def authorize_user(bot, chat_id, user_id): 
@@ -23,6 +23,7 @@ def authorize_user(bot, chat_id, user_id):
         status = bot.get_chat_member(chat_id, user_id).status
         return status in ['creator', 'administrator']
     except Exception as e:
+        logger.error(e)
         return False
 
 def mention_markdown(bot, chat_id, user_id, message):
@@ -61,7 +62,8 @@ def on_skip_command(bot, update, job_queue):
                 try:
                     bot.delete_message(
                         job.context['chat_id'], job.context['message_id'])
-                except:
+                except Exception as e:
+                    logger.error(e)
                     pass
                 job.enabled = False
                 job.schedule_removal()
@@ -142,15 +144,16 @@ def on_notify_timeout(bot, job):
 def delete_message(bot, job):
     try:
         bot.delete_message(job.context['chat_id'], job.context['message_id'])
-    except:
-        print(f"can't delete {job.context['message_id']} from {job.context['chat_id']}")
+    except Exception as e:
+        logger.error(f"can't delete {job.context['message_id']} from {job.context['chat_id']}", exc_info=e)
 
 
 def on_kick_timeout(bot, job):
     try:
         bot.delete_message(
             job.context['chat_id'], job.context['message_id'])
-    except:
+    except Exception as e:
+        logger.error(e)
         pass
 
     try:
@@ -206,8 +209,8 @@ def on_hashtag_message(bot, update, user_data, job_queue):
                 try:
                     bot.delete_message(
                         job.context['chat_id'], job.context['message_id'])
-                except:
-                    pass
+                except Exception as e:
+                    logger.error(e)
                 job.enabled = False
                 job.schedule_removal()
                 removed = True
@@ -371,8 +374,8 @@ def on_forward(bot, update, job_queue):
                 try:
                     bot.delete_message(
                         job.context['chat_id'], job.context['message_id'])
-                except:
-                    pass
+                except Exception as e:
+                    logger.error(e)
                 job.enabled = False
                 job.schedule_removal()
 
@@ -427,8 +430,8 @@ def on_message(bot, update, user_data, job_queue):
                     try:
                         bot.delete_message(
                             job.context['chat_id'], job.context['message_id'])
-                    except:
-                        pass
+                    except Exception as e:
+                        logger.error(e)
                     job.enabled = False
                     job.schedule_removal()
             message = bot.send_message(chat_id,
@@ -449,7 +452,8 @@ def on_message(bot, update, user_data, job_queue):
             try:
                 timeout = int(message)
                 assert timeout >= 0
-            except:
+            except Exception as e:
+                logger.error(e)
                 update.message.reply_text(
                     constants.on_failed_set_kick_timeout_response)
                 return
