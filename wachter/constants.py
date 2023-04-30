@@ -54,16 +54,3 @@ class Actions(IntEnum):
     set_regex_filter = auto()
     set_filter_only_new_users = auto()
     get_current_settings = auto()
-
-
-RH_kick_messages = [
-    'Хакер %USER\_MENTION% молчит и покидает чат. ⚰',
-    'Хакера %USER\_MENTION% забрал роскомнадзор',
-    'Хакера %USER\_MENTION% забрал Интерпол',
-    'Хакер %USER\_MENTION% провалил дедлайн',
-    'Хакер %USER\_MENTION% не смог выйти из VIM',
-    'Хакер %USER\_MENTION% пошёл кормить рыбок',
-    'Хакер %USER\_MENTION% провалил испытание'
-]
-
-RH_CHAT_ID = -1001147286684
