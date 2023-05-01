@@ -215,7 +215,7 @@ def on_hashtag_message(bot, update, user_data, job_queue):
                 job.schedule_removal()
                 removed = True
 
-        if removed:
+        if removed and len(message) > 0:
             message_markdown = mention_markdown(bot, chat_id, user_id, message)
             update.message.reply_text(
                 message_markdown, parse_mode=telegram.ParseMode.MARKDOWN)
