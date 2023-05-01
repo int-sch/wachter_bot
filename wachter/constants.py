@@ -39,7 +39,7 @@ Regex фильтр: ```{regex_filter}```
 """
 
 default_kick_timeout = 0
-notify_delta = 10
+notify_delta = 60
 min_whois_length = 60
 
 
