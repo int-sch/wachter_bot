@@ -489,6 +489,8 @@ def on_message(bot, update, user_data, job_queue):
                     chat = Chat(
                         id=chat_id, on_known_new_chat_member_message=message)
                 if action == Actions.set_on_successful_introducion_response:
+                    if message == "%SKIP%":
+                        message = ''
                     chat = Chat(id=chat_id, on_introduce_message=message)
                 if action == Actions.set_notify_message:
                     chat = Chat(id=chat_id, notify_message=message)
