@@ -24,7 +24,7 @@ services:
 
   schintbot:
     container_name: schintbot-prod
-    image: ghcr.io/alexeyqu/wachter_bot/schintbot:prod
+    image: ghcr.io/int-sch/wachter_bot/schintbot:prod
     environment:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - TELEGRAM_ERROR_CHAT_ID=${TELEGRAM_ERROR_CHAT_ID}
