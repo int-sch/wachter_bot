@@ -123,6 +123,7 @@ def on_new_chat_member(bot, update, job_queue):
 
 
 def on_notify_timeout(bot, job):
+    return
     with session_scope() as sess:
         chat = sess.query(Chat).filter(
             Chat.id == job.context['chat_id']).first()
@@ -149,6 +150,7 @@ def delete_message(bot, job):
 
 
 def on_kick_timeout(bot, job):
+    return
     try:
         bot.delete_message(
             job.context['chat_id'], job.context['message_id'])
