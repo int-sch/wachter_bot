@@ -40,7 +40,7 @@ Regex фильтр: ```{regex_filter}```
 
 default_kick_timeout = 0
 notify_delta = 60
-min_whois_length = 60
+min_whois_length = 0
 
 
 # ACTIONS

@@ -186,7 +186,7 @@ def on_hashtag_message(bot, update, user_data, job_queue):
     chat_id = update.message.chat_id
 
     if "#whois" in update.message.parse_entities(types=['hashtag']).values() \
-        and len(update.message.text) >= constants.min_whois_length \
+        # and len(update.message.text) >= constants.min_whois_length \
         and chat_id < 0:
         user_id = update.message.from_user.id
 
