@@ -3,7 +3,7 @@ version: "3.9"
 services:
   schintbot-db:
     container_name: schintbot-db-prod
-    image: postgres:alpine
+    image: postgres:15-alpine
     restart: always
     ports:
       - 5432:5432
